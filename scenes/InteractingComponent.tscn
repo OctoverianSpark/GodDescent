@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqd688x2bvl6i"]
+
+[ext_resource type="Script" uid="uid://cjed6mb4xqm68" path="res://scripts/interacting_component.gd" id="1_vy07x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jcy0q"]
+radius = 39.012817
+
+[node name="InteractingComponent" type="Node2D"]
+script = ExtResource("1_vy07x")
+
+[node name="InteractRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange"]
+visibility_layer = 0
+shape = SubResource("CircleShape2D_jcy0q")
+
+[node name="InteractLabel" type="Label" parent="."]
+z_index = 10
+offset_left = -76.00001
+offset_top = -108.00001
+offset_right = 990.0
+offset_bottom = 57.999992
+scale = Vector2(0.25839883, 0.27089325)
+theme_override_font_sizes/font_size = 116
+text = "Press X to Interact"
+
+[connection signal="area_entered" from="InteractRange" to="." method="_on_interact_range_area_entered"]
+[connection signal="area_exited" from="InteractRange" to="." method="_on_interact_range_area_exited"]

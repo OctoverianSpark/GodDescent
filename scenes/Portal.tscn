@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://k4ts6b8txwqs"]
+
+[ext_resource type="Texture2D" uid="uid://de0tiox1rk4x8" path="res://sprites/portal.png" id="1_4hdyq"]
+[ext_resource type="Script" uid="uid://dphe2070e2onu" path="res://scripts/portal.gd" id="1_aamt4"]
+[ext_resource type="PackedScene" uid="uid://k1srtmkoqrto" path="res://scenes/interactable.tscn" id="2_bagdj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aamt4"]
+radius = 115.21675
+
+[node name="Portal" type="Node2D"]
+script = ExtResource("1_aamt4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4hdyq")
+hframes = 30
+vframes = 2
+
+[node name="Interactable" parent="." instance=ExtResource("2_bagdj")]
+interact_name = "Next Area"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+scale = Vector2(1.1206639, 1.6159592)
+shape = SubResource("CircleShape2D_aamt4")
