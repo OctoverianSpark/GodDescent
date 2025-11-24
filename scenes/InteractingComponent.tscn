@@ -16,12 +16,12 @@ shape = SubResource("CircleShape2D_jcy0q")
 
 [node name="InteractLabel" type="Label" parent="."]
 z_index = 10
-offset_left = -76.00001
-offset_top = -108.00001
-offset_right = 990.0
-offset_bottom = 57.999992
+offset_left = -48.0
+offset_top = -49.0
+offset_right = 416.39844
+offset_bottom = 21.0
 scale = Vector2(0.25839883, 0.27089325)
-theme_override_font_sizes/font_size = 116
+theme_override_font_sizes/font_size = 51
 text = "Press X to Interact"
 
 [connection signal="area_entered" from="InteractRange" to="." method="_on_interact_range_area_entered"]

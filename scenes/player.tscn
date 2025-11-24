@@ -1,23 +1,64 @@
-[gd_scene load_steps=7 format=3 uid="uid://cilo5soicx70b"]
+[gd_scene load_steps=12 format=3 uid="uid://cilo5soicx70b"]
 
 [ext_resource type="Script" uid="uid://wfe55agh3ecg" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://t0ykr3ap6uvl" path="res://icon.svg" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bjw3lvohck30x" path="res://sprites/player/idle.png" id="2_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://dqd688x2bvl6i" path="res://scenes/InteractingComponent.tscn" id="4_dqkch"]
 [ext_resource type="PackedScene" uid="uid://dvvj6ol5st8jg" path="res://scenes/health_component.tscn" id="5_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://byaydomis8ug0" path="res://scenes/hit_box_component.tscn" id="6_fjrip"]
+[ext_resource type="Texture2D" uid="uid://b6wkd68protua" path="res://sprites/player/dash.png" id="6_tuyoq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
-size = Vector2(128, 128)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tuyoq"]
+radius = 9.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_tuyoq"]
+length = 1.259
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.004749775, 0.09784448, 0.22858356, 0.34183186, 0.4614644, 0.61415327, 0.7731386, 0.92425334, 1.0486082, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_fjrip"]
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "iddle"
+length = 1.1105
+loop_mode = 1
+step = 1.5953
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10259426, 0.21129578, 0.32139584, 0.47723296, 0.58269846, 0.6771452, 0.78103656, 0.89437264, 1.0423391),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fjrip"]
+_data = {
+&"RESET": SubResource("Animation_tuyoq"),
+&"dash": SubResource("Animation_fjrip"),
+&"idle": SubResource("Animation_qlg0r")
+}
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
 script = ExtResource("1_g2els")
 health_component = NodePath("HealthComponent")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_qhqgy")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_hqtel")
+shape = SubResource("CapsuleShape2D_tuyoq")
 
 [node name="InteractingComponent" parent="." instance=ExtResource("4_dqkch")]
 position = Vector2(1, -2)
@@ -25,3 +66,22 @@ position = Vector2(1, -2)
 [node name="HitBoxComponent" parent="." instance=ExtResource("6_fjrip")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_tuyoq")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprites/Idle")
+libraries = {
+&"": SubResource("AnimationLibrary_fjrip")
+}
+autoplay = "idle"
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Idle" type="Sprite2D" parent="Sprites"]
+position = Vector2(1, -1)
+texture = ExtResource("2_qlg0r")
+hframes = 10
+
+[node name="Dash" type="Sprite2D" parent="Sprites"]
+position = Vector2(2, -2)
+texture = ExtResource("6_tuyoq")
+hframes = 10
