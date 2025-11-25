@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cilo5soicx70b"]
+[gd_scene load_steps=29 format=3 uid="uid://cilo5soicx70b"]
 
 [ext_resource type="Script" uid="uid://wfe55agh3ecg" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bjw3lvohck30x" path="res://sprites/player/idle.png" id="2_qlg0r"]
@@ -240,9 +240,57 @@ _data = {
 &"walk": SubResource("Animation_oprun")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ur7pv"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y4r1p"]
+animation = &"dash"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d2wvv"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3v2ag"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jej6c"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f1ej7"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oprun"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a8ls1"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qfm1y"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ur7pv"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i4ail"]
+states/attack/node = SubResource("AnimationNodeAnimation_ur7pv")
+states/attack/position = Vector2(444, 212)
+states/dash/node = SubResource("AnimationNodeAnimation_y4r1p")
+states/dash/position = Vector2(627, 72)
+states/idle/node = SubResource("AnimationNodeAnimation_d2wvv")
+states/idle/position = Vector2(303, 100)
+states/walk/node = SubResource("AnimationNodeAnimation_3v2ag")
+states/walk/position = Vector2(444, 66)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_jej6c"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_f1ej7"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_oprun"), "walk", "dash", SubResource("AnimationNodeStateMachineTransition_a8ls1"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_qfm1y"), "dash", "walk", SubResource("AnimationNodeStateMachineTransition_ur7pv")]
+graph_offset = Vector2(134, 26)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "anim_tree")]
 script = ExtResource("1_g2els")
 health_component = NodePath("HealthComponent")
+anim_tree = NodePath("AnimationTree")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_tuyoq")
@@ -264,3 +312,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_qfm1y")
 }
 autoplay = "idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_i4ail")
+anim_player = NodePath("../AnimationPlayer")

@@ -7,7 +7,9 @@ extends CharacterBody2D
 @export var DASHES = 1
 @export var DASH_TIME := 0.15     # Duración del dash en segundos
 @export var health_component: HealthComponent
+@export var anim_tree: AnimationTree
 var can_interact = false
+var state_machine
 
 enum STATES {
 	IDLE,
@@ -31,6 +33,7 @@ var dash_direction := 1  # dirección del dash
 func _ready()->void:
 	health_component.onHit.connect(func(): change_state(STATES.HURT))
 	health_component.onDead.connect(func(): change_state(STATES.DEAD))
+	state_machine = anim_tree["parameters/playback"]
 	
 
 
@@ -65,6 +68,8 @@ func _state_logic(delta):
 		# ---------------- IDLE ----------------
 		STATES.IDLE:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
+			state_machine.travel("idle")
+			
 
 			if dir != 0:
 				change_state(STATES.WALKING)
@@ -78,6 +83,8 @@ func _state_logic(delta):
 
 		# ---------------- WALKING ----------------
 		STATES.WALKING:
+			state_machine.travel("walk")
+			
 			velocity.x = dir * SPEED
 
 			if dir == 0:
@@ -115,6 +122,8 @@ func _state_logic(delta):
 
 		# ---------------- DASH ----------------
 		STATES.DASH:
+			state_machine.travel("dash")
+			
 			dash_timer -= delta
 
 			# Sin gravedad mientras dura el dash
