@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export var health_component: HealthComponent
 @export var anim_tree: AnimationTree
 var can_interact = false
-var state_machine
+var state_machine : AnimationNodeStateMachinePlayback
 
 enum STATES {
 	IDLE,
@@ -31,9 +31,7 @@ var dash_direction := 1  # dirección del dash
 
 
 func _ready()->void:
-	health_component.onHit.connect(func(): change_state(STATES.HURT))
-	health_component.onDead.connect(func(): change_state(STATES.DEAD))
-	state_machine = anim_tree["parameters/playback"]
+	state_machine = anim_tree.get('parameters/playback')
 	
 
 
@@ -68,7 +66,6 @@ func _state_logic(delta):
 		# ---------------- IDLE ----------------
 		STATES.IDLE:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-			state_machine.travel("idle")
 			
 
 			if dir != 0:
@@ -150,6 +147,7 @@ func _apply_gravity(delta):
 	if state != STATES.DASH: # sin gravedad durante dash
 		if not is_on_floor():
 			velocity += get_gravity() * delta
+	
 
 
 func _handle_jump():

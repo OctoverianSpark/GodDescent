@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://cilo5soicx70b"]
+[gd_scene load_steps=29 format=3 uid="uid://cilo5soicx70b"]
 
 [ext_resource type="Script" uid="uid://wfe55agh3ecg" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bjw3lvohck30x" path="res://sprites/player/idle.png" id="2_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://dqd688x2bvl6i" path="res://scenes/InteractingComponent.tscn" id="4_dqkch"]
 [ext_resource type="PackedScene" uid="uid://dvvj6ol5st8jg" path="res://scenes/health_component.tscn" id="5_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://byaydomis8ug0" path="res://scenes/hit_box_component.tscn" id="6_fjrip"]
 [ext_resource type="Texture2D" uid="uid://cl5tt40g6mgxn" path="res://sprites/player/attack.png" id="6_smehm"]
 [ext_resource type="Texture2D" uid="uid://b6wkd68protua" path="res://sprites/player/dash.png" id="6_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://byrnxro0476e3" path="res://sprites/player/walk.png" id="8_ur7pv"]
@@ -281,6 +282,13 @@ graph_offset = Vector2(-101, 17)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "anim_tree")]
 script = ExtResource("1_g2els")
+SPEED = null
+RUN_SPEED = null
+DASH_SPEED = null
+JUMP_VELOCITY = null
+JUMPS = null
+DASHES = null
+DASH_TIME = null
 health_component = NodePath("HealthComponent")
 anim_tree = NodePath("AnimationTree")
 
@@ -289,6 +297,8 @@ shape = SubResource("CapsuleShape2D_tuyoq")
 
 [node name="InteractingComponent" parent="." instance=ExtResource("4_dqkch")]
 position = Vector2(1, -2)
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("6_fjrip")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_tuyoq")]
 
