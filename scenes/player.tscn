@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cilo5soicx70b"]
+[gd_scene load_steps=29 format=3 uid="uid://cilo5soicx70b"]
 
 [ext_resource type="Script" uid="uid://wfe55agh3ecg" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bjw3lvohck30x" path="res://sprites/player/idle.png" id="2_qlg0r"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bluqeppjimc8g" path="res://scenes/Movement.tscn" id="8_smehm"]
 [ext_resource type="Texture2D" uid="uid://byrnxro0476e3" path="res://sprites/player/walk.png" id="8_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://e8hpk1lwbyu8" path="res://sprites/player/jump.png" id="9_y4r1p"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_smehm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tuyoq"]
 radius = 9.0
@@ -282,6 +284,7 @@ graph_offset = Vector2(-101, 17)
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_tree")]
 script = ExtResource("1_g2els")
 anim_tree = NodePath("AnimationTree")
+animation_states = SubResource("AnimationNodeStateMachinePlayback_smehm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_tuyoq")
@@ -304,4 +307,4 @@ tree_root = SubResource("AnimationNodeStateMachine_i4ail")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Movement" parent="." instance=ExtResource("8_smehm")]
-speed = 120.0
+speed = 103.87
