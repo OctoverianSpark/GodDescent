@@ -304,4 +304,4 @@ tree_root = SubResource("AnimationNodeStateMachine_i4ail")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Movement" parent="." instance=ExtResource("8_smehm")]
-speed = 120.0
+speed = 200.0
