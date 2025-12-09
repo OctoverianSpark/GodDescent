@@ -1,5 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://cilo5soicx70b"]
+[gd_scene load_steps=28 format=3 uid="uid://cilo5soicx70b"]
 
+[ext_resource type="Script" uid="uid://wfe55agh3ecg" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bjw3lvohck30x" path="res://sprites/player/idle.png" id="2_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://dqd688x2bvl6i" path="res://scenes/InteractingComponent.tscn" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cl5tt40g6mgxn" path="res://sprites/player/attack.png" id="6_smehm"]
@@ -267,6 +268,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3v2ag"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i4ail"]
+states/End/position = Vector2(852, 100)
 states/Start/position = Vector2(33, 100)
 states/attack/node = SubResource("AnimationNodeAnimation_ur7pv")
 states/attack/position = Vector2(444, 212)
@@ -280,12 +282,14 @@ transitions = ["walk", "attack", SubResource("AnimationNodeStateMachineTransitio
 graph_offset = Vector2(-101, 17)
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_tuyoq")
 one_way_collision = true
 
 [node name="InteractingComponent" parent="." instance=ExtResource("4_dqkch")]
+visible = false
 position = Vector2(1, -2)
 
 [node name="Sprite" type="Sprite2D" parent="."]
