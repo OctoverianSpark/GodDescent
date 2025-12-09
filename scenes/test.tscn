@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://cml2yun16at2o"]
+[gd_scene load_steps=7 format=4 uid="uid://cml2yun16at2o"]
 
 [ext_resource type="Texture2D" uid="uid://d1guda3kcwpjv" path="res://sprites/map.png" id="1_bl13t"]
 [ext_resource type="PackedScene" uid="uid://ce7wgquhvjlxv" path="res://enemy.tscn" id="3_74lek"]
@@ -167,6 +167,8 @@ texture = ExtResource("1_bl13t")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_iyx0m")
 
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_iyx0m"]
+
 [node name="Map" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -174,9 +176,7 @@ tile_map_data = PackedByteArray("AAD8//3/AAAAAAQAAAD8/wIAAAAAAAYAAAD9//3/AAABAAQ
 tile_set = SubResource("TileSet_74lek")
 
 [node name="Player" parent="." instance=ExtResource("3_iyx0m")]
-SPEED = 120.0
-RUN_SPEED = 200.0
-DASH_SPEED = 400.0
+animation_states = SubResource("AnimationNodeStateMachinePlayback_iyx0m")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3.195, 3.195)

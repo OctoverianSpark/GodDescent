@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://xdkfyo3tkb3v"]
+
+[ext_resource type="Script" uid="uid://cg38p051w8f1w" path="res://scripts/player_2.gd" id="1_duwet"]
+[ext_resource type="Texture2D" uid="uid://bjw3lvohck30x" path="res://sprites/player/idle.png" id="2_duwet"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5vusm"]
+
+[sub_resource type="AnimationRootNode" id="AnimationRootNode_duwet"]
+
+[node name="Player_2" type="CharacterBody2D"]
+script = ExtResource("1_duwet")
+metadata/_custom_type_script = "uid://wfe55agh3ecg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5vusm")
+one_way_collision = true
+debug_color = Color(0.9966629, 0.05371751, 1.347661e-06, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_duwet")
+hframes = 10
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationRootNode_duwet")
+anim_player = NodePath("../AnimPlayer")

@@ -1,6 +1,5 @@
-[gd_scene load_steps=29 format=3 uid="uid://cilo5soicx70b"]
+[gd_scene load_steps=27 format=3 uid="uid://cilo5soicx70b"]
 
-[ext_resource type="Script" uid="uid://wfe55agh3ecg" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bjw3lvohck30x" path="res://sprites/player/idle.png" id="2_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://dqd688x2bvl6i" path="res://scenes/InteractingComponent.tscn" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cl5tt40g6mgxn" path="res://sprites/player/attack.png" id="6_smehm"]
@@ -8,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bluqeppjimc8g" path="res://scenes/Movement.tscn" id="8_smehm"]
 [ext_resource type="Texture2D" uid="uid://byrnxro0476e3" path="res://sprites/player/walk.png" id="8_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://e8hpk1lwbyu8" path="res://sprites/player/jump.png" id="9_y4r1p"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_smehm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tuyoq"]
 radius = 9.0
@@ -270,24 +267,23 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3v2ag"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i4ail"]
+states/Start/position = Vector2(33, 100)
 states/attack/node = SubResource("AnimationNodeAnimation_ur7pv")
 states/attack/position = Vector2(444, 212)
 states/dash/node = SubResource("AnimationNodeAnimation_y4r1p")
-states/dash/position = Vector2(627, 72)
+states/dash/position = Vector2(699, 100)
 states/idle/node = SubResource("AnimationNodeAnimation_d2wvv")
-states/idle/position = Vector2(293, 66)
+states/idle/position = Vector2(189, 100)
 states/walk/node = SubResource("AnimationNodeAnimation_3v2ag")
-states/walk/position = Vector2(444, 91)
+states/walk/position = Vector2(444, 100)
 transitions = ["walk", "attack", SubResource("AnimationNodeStateMachineTransition_oprun"), "walk", "dash", SubResource("AnimationNodeStateMachineTransition_a8ls1"), "dash", "walk", SubResource("AnimationNodeStateMachineTransition_ur7pv"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_y4r1p"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_d2wvv"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_3v2ag")]
 graph_offset = Vector2(-101, 17)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_tree")]
-script = ExtResource("1_g2els")
-anim_tree = NodePath("AnimationTree")
-animation_states = SubResource("AnimationNodeStateMachinePlayback_smehm")
+[node name="Player" type="CharacterBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_tuyoq")
+one_way_collision = true
 
 [node name="InteractingComponent" parent="." instance=ExtResource("4_dqkch")]
 position = Vector2(1, -2)
