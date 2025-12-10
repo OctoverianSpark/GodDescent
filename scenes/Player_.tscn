@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bjw3lvohck30x" path="res://sprites/player/idle.png" id="2_duwet"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5vusm"]
-radius = 9.0
-height = 32.0
+radius = 8.0
+height = 34.0
 
 [sub_resource type="AnimationRootNode" id="AnimationRootNode_duwet"]
 
