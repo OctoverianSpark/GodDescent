@@ -15,6 +15,10 @@ run/main_scene="uid://cml2yun16at2o"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[global_group]
+
+Player="Personaje Controlable"
+
 [input]
 
 cancel={

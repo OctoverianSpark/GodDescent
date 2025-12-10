@@ -22,7 +22,7 @@ enum STATES {
 var state: STATES = STATES.IDLE
 var dir_x := 0.0  # Solo dirección horizontal
 
-func _apply_gravity(delta: float) -> void:
+func _apply_gravity(delta: float) -> void: 
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 	else:
@@ -34,9 +34,9 @@ func _handle_jump():
 		velocity.y = JUMP_SPEED
 		state = STATES.JUMPING
 		
-func _set_anim(name: String) -> void:
+func _set_anim(anim: String) -> void:
 	if animation_states:
-		animation_states.travel(name)
+		animation_states.travel(anim)
 	else:
 		print("Playback no asignado")
 
@@ -44,7 +44,8 @@ func _set_anim(name: String) -> void:
 
 func _ready() -> void:
 	movement.setup(self)
-	print(animation_states)
+	animation_states = anim_tree['parameters/playback']
+	
 
 
 
@@ -60,14 +61,16 @@ func _input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed('accept'):
 		state = STATES.JUMPING
+		
+		
 func _update_anim_state():
 	
 	match state:
 		STATES.IDLE:
-			_set_anim("idle")
+			_set_anim('idle')
 
 		STATES.MOVE:
-			_set_anim("walk")
+			_set_anim('walk')
 
 
 
