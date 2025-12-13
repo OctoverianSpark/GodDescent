@@ -1,33 +1,33 @@
 extends CharacterBody2D
 class_name Enemy
-
+@onready var patrol_timer: Timer = $PatrolTimer
 @onready var movement: Movement = $"Movement" as Movement
 @onready var sensor: Area2D = $Sensor
+var is_roaming := true
+var is_chasing:=false
 
 var player: CollisionObject2D
-
+var dir: Vector2
 
 func _ready() -> void:
 	movement.setup(self)
 	
 	
 func _physics_process(delta: float) -> void:
-	if player != null:
-		var direction = (player.global_position - global_position) * delta
-		var distance = global_position.distance_to(player.global_position)
+	if not is_on_floor():
+		velocity.y += get_gravity().y * delta
+	movement.move(dir.x)
+
+
+func _on_patrol_timer_timeout() -> void:
+	$PatrolTimer.wait_time = choose([1.5,2.0,2.5])
+	if !is_chasing:
+		dir = choose([Vector2.RIGHT,Vector2.LEFT])
+		velocity.x = 0
 		
-		if distance > 100:
-			movement.move(direction.x)
-		
-	
-
-
-func _on_sensor_body_entered(body: Node2D) -> void:
-	if body.name == 'Player':
-		player = body
-	pass
-	
-
-
-func _on_sensor_body_exited(body: Node2D) -> void:
 	pass # Replace with function body.
+	
+	
+func choose(array):
+	array.shuffle()
+	return array.front()
