@@ -188,12 +188,26 @@ tile_map_data = PackedByteArray("AAD5//v/AAAAAAUAAAD5//z/AAAAAAUAAAD5//3/AAAAAAU
 tile_set = SubResource("TileSet_74lek")
 
 [node name="Player" parent="." instance=ExtResource("3_iyx0m")]
+position = Vector2(534, 0)
 animation_states = SubResource("AnimationNodeStateMachinePlayback_iyx0m")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-2, -13)
 zoom = Vector2(3.195, 3.195)
 
-[node name="enemy" parent="." instance=ExtResource("3_74lek")]
-position = Vector2(384, 15.000001)
+[node name="enemy" parent="." node_paths=PackedStringArray("patrol_points") instance=ExtResource("3_74lek")]
+position = Vector2(637, -1.0000029)
 scale = Vector2(0.44000244, 0.44000244)
 collision_mask = 1
+patrol_points = NodePath("PatrolPoints")
+
+[node name="PatrolPoints" type="Node2D" parent="enemy"]
+
+[node name="Point1" type="Marker2D" parent="enemy/PatrolPoints"]
+position = Vector2(-99.99945, 95.45403)
+
+[node name="Point2" type="Marker2D" parent="enemy/PatrolPoints"]
+position = Vector2(-715.90515, 90.90859)
+
+[node name="Point3" type="Marker2D" parent="enemy/PatrolPoints"]
+position = Vector2(-1390.9015, 93.181305)

@@ -282,6 +282,7 @@ transitions = ["walk", "attack_3", SubResource("AnimationNodeStateMachineTransit
 graph_offset = Vector2(-101, 17)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_tree")]
+collision_layer = 2
 script = ExtResource("1_g2els")
 anim_tree = NodePath("AnimationTree")
 animation_states = SubResource("AnimationNodeStateMachinePlayback_smehm")
