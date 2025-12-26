@@ -10,6 +10,7 @@ func exit() -> void:
 	pass
 	
 func update(delta: float) -> void:
+	
 	pass
 	
 func physics_process(delta: float) -> void:
