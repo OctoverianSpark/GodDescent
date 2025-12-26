@@ -207,7 +207,7 @@ patrol_points = NodePath("PatrolPoints")
 position = Vector2(-99.99945, 95.45403)
 
 [node name="Point2" type="Marker2D" parent="enemy/PatrolPoints"]
-position = Vector2(-715.90515, 90.90859)
+position = Vector2(-654.5419, 93.181305)
 
 [node name="Point3" type="Marker2D" parent="enemy/PatrolPoints"]
-position = Vector2(-1390.9015, 93.181305)
+position = Vector2(272.72595, 104.54489)

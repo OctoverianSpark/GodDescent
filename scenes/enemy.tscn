@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ce7wgquhvjlxv"]
+[gd_scene load_steps=10 format=3 uid="uid://ce7wgquhvjlxv"]
 
 [ext_resource type="Script" uid="uid://dmb5g8gvjl3et" path="res://enemy.gd" id="1_c4w8v"]
 [ext_resource type="Texture2D" uid="uid://bjw3lvohck30x" path="res://sprites/player/idle.png" id="2_xwavj"]
 [ext_resource type="PackedScene" uid="uid://byaydomis8ug0" path="res://scenes/hit_box_component.tscn" id="3_nenq2"]
 [ext_resource type="PackedScene" uid="uid://dvvj6ol5st8jg" path="res://scenes/health_component.tscn" id="4_md484"]
 [ext_resource type="PackedScene" uid="uid://bluqeppjimc8g" path="res://scenes/components/Movement.tscn" id="5_ipns3"]
+[ext_resource type="Script" uid="uid://ofxc7wf2kehd" path="res://scenes/state_machine.gd" id="6_md484"]
 [ext_resource type="Script" uid="uid://dfqr1d10wn7qs" path="res://scenes/enemy_idle.gd" id="6_xwavj"]
 [ext_resource type="Script" uid="uid://hdasngr3347o" path="res://scenes/enemy_walking.gd" id="7_nenq2"]
 
@@ -34,10 +35,12 @@ shape = SubResource("CapsuleShape2D_xwavj")
 [node name="Movement" parent="." instance=ExtResource("5_ipns3")]
 speed = 100.0
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("6_md484")
+current_state = NodePath("Patrol")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("6_xwavj")
 
-[node name="Walking" type="Node" parent="StateMachine"]
+[node name="Patrol" type="Node" parent="StateMachine"]
 script = ExtResource("7_nenq2")

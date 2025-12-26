@@ -3,7 +3,7 @@ extends Node
 
 signal transition(new_state: StringName)
 
-var father
+var father:CharacterBody2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	await owner.ready
@@ -19,5 +19,5 @@ func exit() -> void:
 func update(delta: float) -> void:
 	pass
 	
-func physics_process(delta: float) -> void:
+func physics_update(delta: float) -> void:
 	pass
