@@ -28,7 +28,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(delta: float) -> void:
 	if abs(father.position.x - current_point.x) > 0.5:
-		print(abs(father.position.x - current_point.x))
+		
 		father.movement.move(dir.x)
 	else:
 		current_point_position+=1
